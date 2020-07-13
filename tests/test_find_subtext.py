@@ -20,7 +20,26 @@ class TestFindSubtext(unittest.TestCase):
 
     def test_find_subtext_normal_case(self):
         text_to_search = 'Peter told me that peter the pickle piper piped a pitted pickle before he petered out. Phew!'
+
         subtext = 'Peter'
+        indices = find_subtext(text_to_search, subtext)
+        self.assertEqual(indices, [1, 20, 75])
+
+        subtext = 'pick'
+        indices = find_subtext(text_to_search, subtext)
+        self.assertEqual(indices, [30, 58])
+
+        subtext = 'pi'
+        indices = find_subtext(text_to_search, subtext)
+        self.assertEqual(indices, [30, 37, 43, 51, 58])
+
+    def test_find_subtext_lower_case(self):
+        text_to_search = 'Peter told me that peter the pickle piper piped a pitted pickle before he petered out. Phew!'
+        subtext = 'peter'
 
         indices = find_subtext(text_to_search, subtext)
         self.assertEqual(indices, [1, 20, 75])
+
+
+if __name__ == '__main__':
+    unittest.main()
